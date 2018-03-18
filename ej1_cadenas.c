@@ -1,5 +1,6 @@
 //Paula Arellano
-//Ejercicio	Realice sus propios programas para suplir a las funciones :
+//Ejercicio	Realice sus propios programas para suplir a las funciones :
+
 #include <stdio.h>
 #include<string.h>
 
@@ -58,6 +59,8 @@ void main() {
 	}
 	
 	i = 0;
+	j=0;
+	//Opción:cadenas iguales.
 	while ((cadena1cmp[i] != '\0')&&(cadena2cmp[i]!='\0')) { 
 
 			if (cadena1cmp[i] == cadena2cmp[i]) {
@@ -68,15 +71,15 @@ void main() {
 				resultado = -1;
 				break;
 			}
-			else 
-				resultado = 0;
-			
+			else if(cadena1cmp[i] == cadena2cmp[i]){ 
+				j++;//Cuenta las veces que son iguales.
+			}
 		i++;
 		n--;
 	}
 
-	if (resultado == 0)
-		printf("Las cadenas son distintas. \n");
+	if (j==i)//si j se suma todas las veces que i entra al último else-if, y es para todas las posiciones,entonces las cadenas son iguales.
+		printf("Las cadenas son iguales. \n");
 	else if (resultado == 1)
 		printf("Orden ascendente. \n"); 
 	else if (resultado == -1)

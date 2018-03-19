@@ -1,4 +1,4 @@
-//Desarrollado por ¡lvaro Monteagudo PÈrez
+//Desarrollado por √Ålvaro Monteagudo P√©rez
 //Programa para contar el numero de palabras que hay en una frase
 
 #include <stdio.h>
@@ -25,7 +25,7 @@ void main() {
 	printf("En la frase \"%s\" hay %d palabras\n", frase, palabras + 1);
 	system("pause");
 
-	//en la linea 21 utilizo palabras + 1 porque con el for sumo una palabra cada vez
+	//en la linea 25 utilizo palabras + 1 porque con el for sumo una palabra cada vez
 	//que hay un espacio por lo que la palabra final nunca cuenta
 
 }

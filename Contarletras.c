@@ -1,3 +1,6 @@
+//Cuenta las veces que aparece una letra en una frase. H eintentado hacer lo mismo con una palabra pero no sale. Miguel Jimenez
+
+
 #include <stdio.h>
 
 

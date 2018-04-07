@@ -1,65 +1,55 @@
-//Alejandro López Guerrero
-/*Este programa muestra el número de veces que aparece un caracter en una palabra
- o en una frase y los ordena por ranking del más común al menos común
- */
+//Alejandro LÃ³pez Guerrero
+/*Este programa muestra el nÃºmero de veces que aparece un caracter en una palabra
+ o texto y los ordena por ranking del mÃ¡s al menos comÃºn */
+
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
-
 #include <stdio.h>
-#define string_size 400
+#include <string.h>
+#define MAX_LONG_TEXTO 400 //Longitud mÃ¡xima del texto a introducir por el ususario
+#define ASCII 255 //Total de caracteres distintos en la tabla ASCII
 
 struct Caracter {
 	char caracter;
 	int contador;
-
 };
-
 
 void main(void) {
 
-	char cadena[string_size],caracter= '\0';
-	int i, j, length_string, vector_contador[378];
-	struct Caracter vector[378],aux;
-
-
+	struct Caracter vector[ASCII]; //En este vector se almacenarÃ¡n todos los caracteres posibles y las veces presentes en el texto
+	struct Caracter aux;
+	char cadena[MAX_LONG_TEXTO], caracter;
+	int i, j, long_texto;
+	
 	printf("\n\tANALIZADOR\n\n");
 	printf("Introduce la palabra o texto para analizar:\n\n>>> ");
 	gets(cadena);
-
-	for (i = 0; i < string_size; i++) {
-		if (cadena[i] == '\0') {
-			length_string = i;  //Con este paso solo evalua posteriormente la parte de la cadena que no esté vacía
-			break;
-		}
-	}
-
-	for (i = 0; i < 243; i++) {
+	_strupr(cadena);
+	long_texto = strlen(cadena);
+	
+	//En el siguiente for inicializo todos los caracteres con la variable contador a 0.
+	for (i = 0; i < ASCII; i++) {
 		vector[i].contador = 0;
 	}
-
-	for (i = 0; i < length_string; i++) {
-		if (((cadena[i] >= 'a') && (cadena[i] <= 'z'))) {  //Para no distinguir entre mayúsculas y minúsculas
-			cadena[i] = cadena[i] - 32;
-		}
-	}
-
+	
 	vector[0].caracter = '\0';
-
-	for (i = 0; i < 243; i++) {
+	/*En el siguiente bucle comparo cada caracter de la tabla ASCII con cada caracter del texto. Si en algÃºn momento 
+	coinciden estos caracteres, la variable contador aumenta en una unidad*/
+	for (i = 1; i < ASCII; i++) {
 		vector[i].caracter = vector[i-1].caracter + 1;
-		for (j = 0; j < length_string; j++) {
+		for (j = 0; j < long_texto; j++) {
 			if (cadena[j] == vector[i].caracter) {
 				vector[i].contador = vector[i].contador  + 1;
 			}
 		}
 	}
-
-
-	for (i = 0; i < 243; i++) {
-		for (j = i + 1; j < 377; j++) { 
-			if (vector[i].contador < vector[j].contador) {
+	/*Ordeno dentro del vector de estructura Caracter de mayor a menor. 
+	Este es el algoritmo de la burbjuja aplicado a vectores de estructuras*/
+	for (i = 0; i < ASCII; i++) {
+		for (j = i + 1; j < ASCII; j++) { 
+			if (vector[i].contador < vector[j].contador) {//ComparaciÃ³n de la variable contador entre varios caracteres
 				aux = vector[i];
 				vector[i] = vector[j];
 				vector[j] = aux;
@@ -69,9 +59,12 @@ void main(void) {
 
 	system("cls");
 	printf("\n\tRANKING DE CARACTERES\n\n\t____________________\n\t| CARACTER | VECES |\n\t|__________|_______|");
-	for (i = 0; i < 243; i++) {
+	
+	/*Ahora imprimo por pantalla sÃ³lo los caracteres con la variable contador distinta de 0.
+	El vector ya estÃ¡ ordenado de mayor a menor*/
+	for (i = 0; i < ASCII; i++) {
 		if (vector[i].contador != 0) {
-			if (vector[i].caracter == 32) {
+			if (vector[i].caracter == 32) {//32 corresponde al caracter del espacio en ASCII
 				printf("\n\t| (espacio)|  %d    |", vector[i].contador);
 			}
 			else
